@@ -10,7 +10,9 @@ jobs:
     
         steps:
         - name: Checkout code
-          uses: actions/checkout@v4
+          uses: actions/checkout@v6
+          with:
+            persist-credentials: false # Prevent keychain dialog on MacOS
     
         - name: Build Release
           run: cargo build --release
