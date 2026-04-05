@@ -1,0 +1,23 @@
+name: Deploy Okra Server
+
+on:
+  push:
+    branches: [ "ci-test" ]
+
+jobs:
+    deploy:
+        runs-on: self-hosted
+    
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+    
+        - name: Build Release
+          run: cargo build --release
+    
+        - name: Restart Service
+          run: |
+            # Copy binary to a stable location
+            cp target/release/okra-server ~/server/current_bin
+            # Tell macOS to restart the background service
+            launchctl kickstart -k gui/$(id -u)/com.okra.server
