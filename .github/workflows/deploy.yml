@@ -2,7 +2,7 @@ name: Deploy Okra Server
 
 on:
   push:
-    branches: [ "ci-test" ]
+    branches: [ "main" ]
 
 jobs:
     deploy:
